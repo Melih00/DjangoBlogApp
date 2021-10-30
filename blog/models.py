@@ -39,7 +39,7 @@ class User(AbstractBaseUser,PermissionsMixin):
         return self.username
 class Posts(models.Model):
     creator = models.ForeignKey(User, on_delete=models.CASCADE,related_name='creator')
-    title = models.CharField( max_length=50)
+    title = models.CharField( max_length=70)
     image =  models.ImageField(upload_to='media/post_images',default='post_images/amugus.gif')
     content = models.TextField()
     last_updated = models.TimeField( auto_now=True)
