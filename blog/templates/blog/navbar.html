@@ -20,7 +20,7 @@
       <a class="nav-link" aria-current="page" style="color: white;" href="{% url 'logout'%}">Logout</a>
       <a class="nav-link" aria-current="page" style="color: white;" href="{% url 'post_create'%}">New Post</a><a  style="color: rgb(255, 206, 244);" aria-current="page"
         class="nav-link" href="{% url 'profile' %}"><b><i><img src="../media/{{user.profile_pic}}"
-              style="border-radius: 50%; margin-right: 6px; display: absolut; right: 0;" height="30px" onerror="this.style.display='none'" width="30px"
+              style="border-radius: 50%; margin-right: 6px; display: absolut; right: 0;" height="30px" onerror="this.src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTZ_L2T-RY9LNxs90Gi_jeRrYQmEiNnHj0Ilg&usqp=CAU'" width="30px"
               alt="">{{user.username}}</i></b></a>
       {%else%} <a aria-current="page" class="nav-link disabled" href="#">Welcome Guest!</a>
       <a class="nav-link" aria-current="page" style="color: white;" href="{% url 'login'%}">Login</a>
