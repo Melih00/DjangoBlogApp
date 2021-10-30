@@ -1,0 +1,32 @@
+{% load static %}
+<nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark" style="height: 63px !important;">
+  <div class="container-fluid">
+    <a class="navbar-brand mx-20" style="margin: 0px 40px;" href="#">Melih's Blog App</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="{% url 'home' %}">Home</a>
+        </li>
+        <li class="nav-item mx-22">
+        </li>
+      </ul>
+
+      {% if request.user.is_authenticated %}
+
+      <a class="nav-link" aria-current="page" style="color: white;" href="{% url 'logout'%}">Logout</a>
+      <a class="nav-link" aria-current="page" style="color: white;" href="{% url 'post_create'%}">New Post</a><a  style="color: rgb(255, 206, 244);" aria-current="page"
+        class="nav-link" href="{% url 'profile' %}"><b><i><img src="../media/{{user.profile_pic}}"
+              style="border-radius: 50%; margin-right: 6px; display: absolut; right: 0;" height="30px" onerror="this.style.display='none'" width="30px"
+              alt="">{{user.username}}</i></b></a>
+      {%else%} <a aria-current="page" class="nav-link disabled" href="#">Welcome Guest!</a>
+      <a class="nav-link" aria-current="page" style="color: white;" href="{% url 'login'%}">Login</a>
+      <a class="nav-link" aria-current="page" style="color: white;" href="{% url 'register'%}">Register</a>
+      {% endif %}
+
+    </div>
+  </div>
+</nav>

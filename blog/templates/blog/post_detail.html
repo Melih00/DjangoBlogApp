@@ -1,0 +1,64 @@
+{% extends 'blog/base.html' %}{% load static %}
+{% block content %}{% load bootstrap_icons %}{% load crispy_forms_tags %}
+<h1 style="display: inline-block;width: 100%; text-align: center;margin-bottom: 20px;">
+    {{post.title}}</h1>
+<div style="display: flex; margin: 0px 30px; align-items: flex-start;"> <img src="{{post.image.url}}"
+        class="img-fluid rounded-start"
+        style="height:45vh; max-height: 60vh; max-width: 45vh; width: auto; position: relative; margin: 0px 30px 10px 0px;" alt="post image">
+    <div style="width: 34%;">
+        {% if request.user.is_authenticated %}
+        <form action="{% url 'like-post' %}" style="margin: 10px 0px; display: flex; justify-content: space-between; padding-right: 20px; height: 47px;" method='post' enctype="multipart/form-data">{% csrf_token %}
+            <p class="m-3 ps-4 " style="display:inline;text-align:left;">{% bs_icon 'heart-fill' color='red'%} {{post.liked.all.count}} likes</p>
+            <input type="hidden" name="post_id" value="{{post.id}}">
+            {% if user not in post.liked.all %}
+            <button type="submit" style="background-color: green; border-radius: 10%; border: none; color: white; padding: 4px 17px;"><b> like</b></button>
+            {% else %}
+            <button type="submit" style="background-color: red; border-radius: 10%; border: none; color: white; padding: 4px 10px;"><b>unlike</b></button>
+            {% endif %}
+          </form>
+          {%else%}
+          <form action="" style="margin: 10px 0px; display: flex; justify-content: space-between; padding-right: 20px; height: 47px;" >{% csrf_token %}
+            <p class="m-3 ps-4 " style="display:inline;text-align:left;">{% bs_icon 'heart-fill' color='red'%} {{post.liked.all.count}} likes</p>
+            <input type="hidden" name="post_id" value="{{post.id}}">
+            {% if user not in post.liked.all %}
+            <button type="submit" title="You Must Login" disabled style="background-color: green; border-radius: 10%; border: none; color: white; padding: 4px 17px;"><b>Like</b></button>
+             {% endif %}
+          </form>{%endif%}
+      
+        <hr>
+        <p class="m-3 ps-4" style=" text-align:left;">{% bs_icon 'eye-fill' color='black'%} {{post.views}} Views
+        </p>
+        <hr>
+        <p class="m-3 ps-4" style="text-align:left;">{% bs_icon 'chat-fill' color='black'%} {{cc}} Comments</p>
+        {% if request.user.is_authenticated %}
+        <form action="" method="post" enctype="multipart/form-data">
+            {% csrf_token %} {{ form | crispy }}
+            <div style="width: 100%; text-align: center;">    
+                <button type="submit" class="btn btn-success"> Share Your Comment</button>
+                <p style="color: red;"><i>You cannot delete your comment after sharing it.</i></p>
+            </div>
+        </form>
+        {% else %}
+        <p style="color: red;padding: 20px;"><i>You must login to share comment. <a href="{% url 'login' %}"></a></i></p>
+        {%endif%}
+    </div>
+    <div style="display: flex; flex-direction: column; flex-grow: 4;overflow-x: auto ; padding-left: 11px; max-height: 40vh;">
+        <h4>Comments</h4>
+        {% for i in comments %}
+    
+        <div style="width: 100%; background-color: rgb(228, 228, 228); margin-bottom: 10px; border: 1px solid gray; height: 100%;">
+
+            <p style="margin: 3px 0px 3px 7px;  display: inline-block;"><i><b>{{i.shared_by}}:</b></i> </p>
+            <p style=" margin: 0px 10px 0px 5px; display: inline-block;">
+                {{i.comment}} </p> <br> <span style="font-size: .9rem; margin-left: 10px;">~{{i.share_time}}</span>
+
+        </div>
+
+        {% endfor %}
+
+    </div>
+</div>
+<div style="padding: 10px 15%;">
+    <p style="overflow-wrap: break-word; font-size: large;">{{post.content}}</p>
+</div>
+{% endblock content %}

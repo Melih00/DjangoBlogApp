@@ -1,0 +1,18 @@
+{%extends 'blog/base.html' %}{%block content%}
+<div style="width: 70%; margin: auto;">
+
+<h2>Registration Form</h2>
+{% load crispy_forms_tags %}
+{% if request.user.is_authenticated %}
+<h3>Thanks for registering</h3>
+<a href="{%url 'home' %}">Check Blogs!</a>
+{% else %}
+<h3>Fill out the form please!</h3>
+<form action="" method="post" enctype="multipart/form-data">
+    {% csrf_token %} {{ form | crispy }}
+    <button type="submit" class="btn btn-success">Register</button>
+</form>
+</form>
+{% endif %}
+</div>
+{%endblock content%}

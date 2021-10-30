@@ -1,0 +1,16 @@
+{%extends 'blog/base.html' %}{%block content%}
+<div style="width: 70%; margin: auto;">
+
+    <h2>Create Blog</h2>
+    {% load crispy_forms_tags %}
+    {% if request.user.is_authenticated %}
+    <form action="" method="post" enctype="multipart/form-data">
+        {% csrf_token %} {{ form | crispy }}
+        <button type="submit" class="btn btn-success">Share</button>
+    </form>
+{% else %}
+<h2>You Must Login To Share Blogs!</h2>
+<a href="{%url 'login'%}">Login</a>
+{% endif %}
+</div>
+{%endblock content%}
