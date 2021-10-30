@@ -134,20 +134,18 @@ def view_profile(req):
     user = req.user
     form = profileForm(instance=user)
     posts = Posts.objects.filter(creator=user.id)
+    comments = Comments.objects.all()
+    cc = {}
+    for i in posts:
+        counter = 0
+        for j in comments:
+            if i.id == j.shared_post.id:
+                counter += 1
+            cc[f"{i.id}"] = counter
     if req.method == 'POST':
-        form = profileForm(data=req.POST,instance=req.user)
+        form = profileForm(req.POST,req.FILES, instance=req.user)
         if form.is_valid():
             form.save()
             messages.success(req, 'Profile Updated!')
             return redirect('home')
-    return render(req,'blog/profile.html',{'user':user,'posts':posts,'form':form})
-# def profile(request):
-#     if request.method == 'POST':
-#         form = profileForm(data=request.POST, instance=request.user)
-#         update = form.save(commit=False)
-#         update.user = request.user
-#         update.save()
-#     else:
-#         form = profileForm(instance=request.user)
-
-#     return render(request, 'profile.html', {'form': form})
+    return render(req,'blog/profile.html',{'user':user,'posts':posts,'form':form,'cc':cc})
