@@ -2,7 +2,7 @@
 {% block content %}{% load bootstrap_icons %}{% load crispy_forms_tags %}
 <h1 style="display: inline-block;width: 100%; text-align: center;margin-bottom: 20px;">
     {{post.title}}</h1>
-<div style="display: flex; margin: 0px 30px; align-items: flex-start;"> <img src="{{post.image.url}}"
+<div style="display: flex; margin: 0px 30px; align-items: flex-start;"> <img src="{{post.image.url}}" onerror="this.src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTZ_L2T-RY9LNxs90Gi_jeRrYQmEiNnHj0Ilg&usqp=CAU'"
         class="img-fluid rounded-start"
         style="height:45vh; max-height: 60vh; max-width: 45vh; width: auto; position: relative; margin: 0px 30px 10px 0px;" alt="post image">
     <div style="width: 34%;">

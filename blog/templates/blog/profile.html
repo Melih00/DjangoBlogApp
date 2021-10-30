@@ -14,7 +14,7 @@
         {% if request.user.is_authenticated %}
         <div style="display: flex; flex-direction: row; justify-content: stretch;">
           <div style="flex-grow: 2; height: 100%; max-height:50vh ;">
-            <img width="100%" height="100%" style="border-radius: 10%;" src="../media/{{user.profile_pic}}" alt="profile pic">
+            <img width="100%" height="100%" style="border-radius: 10%;" src="../media/{{user.profile_pic}}" onerror="this.src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTZ_L2T-RY9LNxs90Gi_jeRrYQmEiNnHj0Ilg&usqp=CAU'" alt="profile pic">
           </div>
         <form style="flex-grow: 6; margin: 10px 30px;" action="" method="post" enctype="multipart/form-data">
             {% csrf_token %} {{ form | crispy }}
@@ -32,7 +32,7 @@
     <div class="card mb-3 ps-0" style="max-width: 670px;">
       <div class="row g-0">
         <div class="col-md-4">
-          <img src="{{i.image.url}}" class="img-fluid rounded-start" style="max-height: 273px; height: 100%; width: 100%;"
+          <img src="{{i.image.url}}" onerror="this.src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTZ_L2T-RY9LNxs90Gi_jeRrYQmEiNnHj0Ilg&usqp=CAU'" class="img-fluid rounded-start" style="max-height: 273px; height: 100%; width: 100%;"
             alt="post image">
         </div>
         <div class="col-md-8">
