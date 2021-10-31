@@ -6,7 +6,7 @@ from django.contrib.messages.api import success
 from blog.forms import CommentForm, PostCreate, UserForm, profileForm
 from django.contrib.auth.forms import AuthenticationForm
 from blog.models import Comments, Like, Posts
-
+import random
 # Create your views here.
 
 
@@ -15,6 +15,7 @@ def home(req):
     posts = Posts.objects.all()
     likes = Like.objects.all()
     user = req.user
+    num = 1
     cc = {}
     lc = {}
     for i in posts:
@@ -35,7 +36,7 @@ def home(req):
         "comments": comments,
         "cc": cc,
         'lc': lc,
-        'user': user
+        'user': user,'num':num
     }
     return render(req, "blog/post_list.html", context)
 

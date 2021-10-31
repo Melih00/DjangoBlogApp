@@ -1,12 +1,13 @@
-{%extends 'blog/base.html' %}{% load static %}{% load humanize %}{% load bootstrap_icons %}{% load tag_library %}{%block content%}
-
+{%extends 'blog/base.html' %}{% load static %}{% load humanize %}{% load bootstrap_icons %}{% load tag_library %}{%block content%}  
+  
 <div class="row" style="justify-content: space-around; align-items: center; padding: 0px 30px;margin-top: 0px;">
   {% for i in posts %}
   <div class="card mb-3 ps-0" style="max-width: 670px;">
     <div class="row g-0">
       <div class="col-md-4">
-        <img src="{{i.image.url}}" onerror="this.src='https://picsum.photos/300/300?random=1'" class="img-fluid rounded-start" style="max-height: 273px; height: 100%; width: 100%;"
+        <img src="{{i.mage.url}}" onerror="this.src='https://picsum.photos/300/300?random={{i.id}}'" class="img-fluid rounded-start" style="max-height: 273px; height: 100%; width: 100%;"
           alt="post image">
+
       </div>
       <div class="col-md-8">
         <div class="card-body h-100"
@@ -17,7 +18,7 @@
                     style="border-radius: 50%; margin-right: 6px; right: 0;" height="30px" width="30px"
                     alt="">{{i.creator}}</i></b></a>
             <hr class="m-2">
-            <h5 class="card-title text-left">{{i.title}} </h5>
+            <h5 class="card-title text-left">{{i.title}}</h5>
           </div>
           <p class="card-text fs-6" style="overflow: hidden;width: 100%;
           text-overflow: ellipsis;
