@@ -5,13 +5,7 @@
 <div
     style="width: 70%;background-color: beige; margin: auto; display: flex;flex-direction: column; align-items: center;justify-content: flex-start;">
     <div style="display: flex;justify-content: flex-start;">
-        <!-- <img width="30%" height="30%" style="border-radius: 10%;" src="../media/{{user.profile_pic}}" alt="profile pic">
-        <div>
-            <h1 style="display: inline-block; padding: 5px 25px; font-size: 3rem;">{{user.username}}</h1><br>
-            <p style="font-size: 1.3rem; padding: 7px 20px;"><b><i> Register Date:</b> {{user.date_joined}}</i></p>
-        </div> -->
-    
-        {% if request.user.is_authenticated %}
+            {% if request.user.is_authenticated %}
         <div style="display: flex; flex-direction: row; justify-content: stretch;">
           <div style="flex-grow: 2; height: 100%; max-height:50vh ;">
             <img width="100%" height="100%" style="border-radius: 10%;" src="../media/{{user.profile_pic}}" onerror="this.src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTZ_L2T-RY9LNxs90Gi_jeRrYQmEiNnHj0Ilg&usqp=CAU'" alt="profile pic">
@@ -32,7 +26,7 @@
     <div class="card mb-3 ps-0" style="max-width: 670px;">
       <div class="row g-0">
         <div class="col-md-4">
-          <img src="{{i.image.url}}" onerror="this.src='https://www.freeiconspng.com/thumbs/no-image-icon/no-image-icon-15.png'"  class="img-fluid rounded-start" style="max-height: 273px; height: 100%; width: 100%;"
+          <img src="{{i.image.url}}" onerror="this.src='https://picsum.photos/300/300?random=2'"  class="img-fluid rounded-start" style="max-height: 273px; height: 100%; width: 100%;"
             alt="post image">
         </div>
         <div class="col-md-8">

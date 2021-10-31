@@ -1,4 +1,4 @@
-from .views import  home,detail,post_create, register, user_login, user_logout,like_post,view_profile
+from .views import  home,detail,post_create, register, user_login, user_logout,like_post,view_profile,delete_post
 from django.urls import path
 
 urlpatterns = [
@@ -10,4 +10,5 @@ urlpatterns = [
    path('detail/<int:id>',detail, name='detail'),
    path('like/',like_post, name='like-post'),
    path('profile/',view_profile, name='profile'),
+   path('delete/<int:id>',delete_post, name='delete'),
 ]

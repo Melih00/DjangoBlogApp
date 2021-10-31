@@ -18,12 +18,12 @@ def home(req):
     cc = {}
     lc = {}
     for i in posts:
-        counter = 0 
+        counter = 0
         for j in likes:
             if i.id == j.post.id:
                 counter += 1
             lc[f"{i.id}"] = counter
-            
+
     for i in posts:
         counter = 0
         for j in comments:
@@ -34,9 +34,9 @@ def home(req):
         "posts": posts,
         "comments": comments,
         "cc": cc,
-        'lc':lc,
-        'user':user
-        }
+        'lc': lc,
+        'user': user
+    }
     return render(req, "blog/post_list.html", context)
 
 
@@ -76,8 +76,10 @@ def detail(req, id):
     post = Posts.objects.get(id=id)
     post.views = post.views + 1
     post.save()
-    post_likes= post.liked.all
-    
+    post_likes = post.liked.all
+    is_author = False
+    if post.creator.id == req.user.id:
+        is_author = True
     comments = Comments.objects.filter(shared_post=post)
     comment_counter = 0
     for i in comments:
@@ -93,7 +95,8 @@ def detail(req, id):
     return render(
         req,
         "blog/post_detail.html",
-        {"post": post, "form": form, "comments": comments, "cc": comment_counter,'post_likes':post_likes},
+        {"post": post, "form": form, "comments": comments, "cc": comment_counter,
+            'post_likes': post_likes, 'is_author': is_author},
     )
 
 
@@ -106,19 +109,22 @@ def post_create(req):
             messages.success(req, "Blog Shared!")
             return redirect("home")
     return render(req, "blog/post_create.html", {"form": form})
+
+
 def like_post(req):
     user = req.user
     if req.method == 'POST':
         post_id = req.POST.get('post_id')
-        post_obj = Posts.objects.get(id = post_id)
-        print(post_id,post_obj)
-        
+        post_obj = Posts.objects.get(id=post_id)
+        print(post_id, post_obj)
+
         if user in post_obj.liked.all():
-            post_obj.liked.remove(user)        
+            post_obj.liked.remove(user)
         else:
-            post_obj.liked.add(user)       
-        
-        like,created = Like.objects.get_or_create(user_id=user.id,post_id=post_id)
+            post_obj.liked.add(user)
+
+        like, created = Like.objects.get_or_create(
+            user_id=user.id, post_id=post_id)
         if not created:
             if like.value == 'Like':
                 messages.success(req, "Post Liked!")
@@ -127,8 +133,9 @@ def like_post(req):
                 like.value = 'Like'
                 messages.success(req, "Post Like Removed!")
         like.save()
-        
+
     return redirect('home')
+
 
 def view_profile(req):
     user = req.user
@@ -143,9 +150,14 @@ def view_profile(req):
                 counter += 1
             cc[f"{i.id}"] = counter
     if req.method == 'POST':
-        form = profileForm(req.POST,req.FILES, instance=req.user)
+        form = profileForm(req.POST, req.FILES, instance=req.user)
         if form.is_valid():
             form.save()
             messages.success(req, 'Profile Updated!')
             return redirect('home')
-    return render(req,'blog/profile.html',{'user':user,'posts':posts,'form':form,'cc':cc})
+    return render(req, 'blog/profile.html', {'user': user, 'posts': posts, 'form': form, 'cc': cc})
+
+def delete_post(req,id):
+    Posts.objects.filter(id=id).delete()
+    messages.success(req, 'Post Deleted!')
+    return redirect('home')
