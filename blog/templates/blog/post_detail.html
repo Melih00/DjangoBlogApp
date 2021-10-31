@@ -26,9 +26,9 @@
           </form>{%endif%}
       
         <hr>
-        <p class="m-3 ps-4" style=" text-align:left;">{% bs_icon 'eye-fill' color='black'%} {{post.views}} Views
-        </p>
-        <hr>
+        <p class="m-3 ps-4" style=" text-align:left; display: flex; justify-content: space-between; align-items: center;"><span>{% bs_icon 'eye-fill' color='black'%} {{post.views}} Views
+      </span>   <span style=" color: rgb(31, 31, 31);">Category: <i>{{post.category}}</i></span>
+       </p> <hr>
         <p class="m-3 ps-4" style="text-align:left;">{% bs_icon 'chat-fill' color='black'%} {{cc}} Comments</p>
         {% if request.user.is_authenticated %}
         <form action="" method="post" enctype="multipart/form-data">

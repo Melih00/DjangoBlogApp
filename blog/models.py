@@ -49,14 +49,14 @@ class Posts(models.Model):
     # shared = models.DateTimeField(auto_now_add=True,)
     
     CATEGORY=(
-        ('it','IT'),
-        ('general culture','General Culture'),
-        ('games','Games'),
-        ('fashion','Fashion'),
-        ('humor','Humor'),
-        ('movies','Movies'),
-        ('chatting','Chatting'),
-        ('others','Others'),
+        ('IT','IT'),
+        ('General Culture','General Culture'),
+        ('Games','Games'),
+        ('Fashion','Fashion'),
+        ('Humor','Humor'),
+        ('Movies','Movies'),
+        ('Chatting','Chatting'),
+        ('Others','Others'),
     )
     category = models.CharField(default='Django', max_length=50 , choices=CATEGORY)
     liked = models.ManyToManyField(User, default=0,blank=False, related_name='liked')
